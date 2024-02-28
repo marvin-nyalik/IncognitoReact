@@ -4,6 +4,7 @@ import ReducerCom from "./components/reducer";
 import User from "./components/User";
 import Shopping from "./components/Shopping";
 import Form from "./components/IdHook";
+import Parent from "./components/Ref";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<User />}></Route>
+          <Route path="/ref" element={<Parent />}></Route>
           <Route path="/posts" element={<Posts />}></Route>
           <Route path="/shop" element={<Shopping />}></Route>
           <Route path="/reducer" element={<ReducerCom />}></Route>
