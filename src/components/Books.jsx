@@ -17,7 +17,7 @@ const Books = () => {
   });
 
   const [filteredBooks, setFilteredBooks] = useState(booksData);
-  const [sortBy, setSortBy] = useState('title');
+  const [sortBy, setSortBy] = useState('year');
 
   const handleSortChange = (e) => {
     setSortBy(e.target.value);
@@ -28,13 +28,13 @@ const Books = () => {
       book.author.toLowerCase().includes(filter.author.trim().toLowerCase()) &&
       book.category.toLowerCase().includes(filter.category.trim().toLowerCase()) &&
       book.title.toLowerCase().includes(filter.title.trim().toLowerCase()) &&
-      (filter.year === '' || book.year.toString().includes(filter.year)))
+      (filter.year === '' || book.year.toString().includes(filter.year.trim())))
     
     filterResult.sort((a,b) => {
       if (sortBy === 'year'){
         const valueA = a[sortBy].toString().toLowerCase()
         const valueB = b[sortBy].toString().toLowerCase()
-        
+
         return valueA.localeCompare(valueB);
       }
       const valueA = a[sortBy].toLowerCase()
@@ -54,7 +54,6 @@ const Books = () => {
       [name]: value
     }))
   }
-
 
   return (
     <>
