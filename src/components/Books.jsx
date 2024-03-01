@@ -1,14 +1,6 @@
 import { useState, useEffect } from "react";
 
-const Books = () => {
-  const booksData = [
-    { author: 'Eunniah Mbabazi', title: 'Breaking Down', year: 1968, category: 'Fiction' },
-    { author: 'Chinua Achebe', title: 'Things Fall Apart', year: 1975, category: 'Non-fiction' },
-    { author: 'Chinua Achebe', title: 'The River Between', year: 1960, category: 'Folklore' },
-    { author: 'Mbongeni Ngema', title: 'Themes of Sarafina', year: 1982, category: 'Science Fiction' },
-    { author: 'Marvin Nyalik', title: 'Lyrical Labyrinth', year: 2005, category: 'Fairytales' },
-  ];
-
+const Books = ({ books }) => {
   const [filter, setFilter] = useState({
     author: '',
     title: '',
@@ -16,7 +8,7 @@ const Books = () => {
     category: ''
   });
 
-  const [filteredBooks, setFilteredBooks] = useState(booksData);
+  const [filteredBooks, setFilteredBooks] = useState(books);
   const [sortBy, setSortBy] = useState('year');
 
   const handleSortChange = (e) => {
@@ -24,7 +16,7 @@ const Books = () => {
   };
 
   useEffect(() => {
-    const filterResult = booksData.filter(book => 
+    const filterResult = books.filter(book => 
       book.author.toLowerCase().includes(filter.author.trim().toLowerCase()) &&
       book.category.toLowerCase().includes(filter.category.trim().toLowerCase()) &&
       book.title.toLowerCase().includes(filter.title.trim().toLowerCase()) &&
@@ -57,11 +49,16 @@ const Books = () => {
 
   return (
     <>
-    <div>
-      <input type="text" name="author" placeholder="Author" onChange={handleInputChange} />
-      <input type="text" name="title" placeholder="Title" onChange={handleInputChange} />
-      <input type="text" name="year" placeholder="Year" onChange={handleInputChange} />
-      <input type="text" name="category" placeholder="Category" onChange={handleInputChange} />
+    <h1 className="text-xl">All Books</h1>
+    <div className="mx-auto max-w-[90%] flex flex-col space-x-4 md:flex-row">
+      <input type="text" name="author" placeholder="Author" onChange={handleInputChange}
+       className="border border-black-700 rounded-xl my-2 px-1" />
+      <input type="text" name="title" placeholder="Title" onChange={handleInputChange} 
+      className="border border-black-700 rounded-xl my-2 px-1"/>
+      <input type="text" name="year" placeholder="Year" onChange={handleInputChange} 
+      className="border border-black-700 rounded-xl my-2 px-1"/>
+      <input type="text" name="category" placeholder="Category" onChange={handleInputChange} 
+      className="border border-black-700 rounded-xl my-2 px-2"/>
       <select value={sortBy} onChange={handleSortChange}>
         <option value="title">Title</option>
         <option value="author">Author</option>
@@ -70,7 +67,8 @@ const Books = () => {
       </select>
     </div>
     {filteredBooks && filteredBooks.map((book) => (
-      <div key={book.title}>
+      <div key={book.title}
+      className="mx-auto max-w-[90%] flex flex-col space-x-4 space-y-4 my-4 border-b border-b-teal-500 border-pink-500">
         <p>Title: {book.title}</p>
         <p>Author: {book.author}</p>
         <p>Year: {book.year}</p>
